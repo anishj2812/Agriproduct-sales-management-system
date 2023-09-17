@@ -7,14 +7,47 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
 <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> -->
-<title>Sabziwala</title>
-<link rel="icon" href="images/sabziwala.jpg">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
-
+<title>Vegieboy</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">   
+    <title>Sabziwala</title>
 </head>
 <body>
+<div id='mydiv' class='textual'>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Vegieboy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sellerloginsuccessful.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="update.php">Update details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pendingorders.php">Pending Orders!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pastorders.php">Past Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <form action="checkpage.php" method="post">
 		<h2>Change Password</h2> 
 		<!-- <p>Please enter Credentials!</p> -->

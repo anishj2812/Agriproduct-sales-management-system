@@ -7,5 +7,5 @@
     $oid=$_GET['order_id'];
     $qry="update customer set order_status = 'cancelled' where order_id=".$_GET['order_id']."";
     mysqli_query($connection,$qry);
-    header("location:sellerloginsuccessful.php")
+    header("location:pendingorders.php")
 ?>  

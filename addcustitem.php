@@ -20,13 +20,13 @@
         $tot=$pr["price"]*$cap;
         // $tot=(string)$tot;
         $rate=$pr["price"];
-        $check="select * from cart where item_id='$id'";
-        $ch=mysqli_query($connection,$check);
-        $ch=mysqli_fetch_array($ch);
         $qry="select id from cust";
         $cid=mysqli_query($connection,$qry);
         $cid=mysqli_fetch_array($cid);
         $cid=$cid["id"];
+        $check="select * from cart where cust_id='$cid' and item_id='$id'";
+        $ch=mysqli_query($connection,$check);
+        $ch=mysqli_fetch_array($ch);
         if($ch!=NULL)
         {
             $qy="update cart set quantity='$cap',total_cost='$tot',seller_id=".$_SESSION['seller']." where item_id='$id'";

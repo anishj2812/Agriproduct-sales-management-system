@@ -1,8 +1,6 @@
-<div id='div' class='text'>
-<h1 id='align' id="text"> Login successful</h1>
-<div id="right"><a href="index.php">Log - out</a></div>
-<br>
-<img style src="images/sabziwala.jpg" alt="SW" class="center1">
+<!-- <h1 id='align' id="text"> Login successful</h1> -->
+<!-- <div id="right"><a href="index.php">Log - out</a></div> -->
+<!-- <img style src="images/Vegieboy.jpg" alt="SW" class="center1"> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,44 +10,67 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
 <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> -->
-<title>Sabziwala</title>
-<link rel="icon" href="images/sabziwala.jpg">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
+<title>Vegieboy</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
+<div id='mydiv' class='textual'>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Vegieboy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="selectSeller.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
     <br>
-<h2> List of Sellers </h2>
-    <?php
+    <div id='mydiv' class='textual'>
+    <!-- ... your other HTML code ... -->
+    
+    <h2 class="text-center"> List of Sellers </h2>
+
+    <div class="row">
+        <?php
         session_start();
         $connection=mysqli_connect('localhost','root');
         mysqli_select_db($connection,'agriproduct');
         $qry="select * from seller_details";
         $cn=mysqli_query($connection,$qry);
-        echo "<table>";
-        echo "<tr>";
-        echo "<th>Name</th>";
-        echo "<th>Mobile</th>";
-        echo "<th>Shop-Address</th>";
-        echo "<th>Select-seller</th>";
-        echo "</tr>";
+        
         while($row=mysqli_fetch_array($cn))
         {
-            echo "<tr>";
-            echo "<td>".$row["Name"]."</td>";
-            echo "<td>".$row["Mobile"]."</td>";
-            echo "<td>".$row["Shop"]."</td>";
-            // " ".." ".." <br>";
-            $link="http://localhost/Dbms_project/customerloginsuccessful.php";
             $od=$row['id'];
-            // echo "<br>";
-            echo "<td><a href=$link?id=$od> Select </a></td>";
-            echo "</tr>";
+            $link="http://localhost/Dbms_project/customerloginsuccessful.php?id=$od";
+
+            echo '<div class="col-md-4">';
+            echo '<div class="card">';
+            echo '<div class="card-header">Name: ' . $row["Name"] . '</div>';
+            echo '<div class="card-body">';
+            echo '<p class="card-text">Mobile: ' . $row["Mobile"] . '</p>';
+            echo '<p class="card-text">Shop-Address: ' . $row["Shop"] . '</p>';
+            echo '<a href="' . $link . '" class="btn btn-primary">Select</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
         }
-        echo "</table>";
-    ?>
-</body>
-</html> 
-</div>  
+        ?>
+    </div>
+</div>

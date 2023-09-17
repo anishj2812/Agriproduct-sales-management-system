@@ -1,204 +1,143 @@
-<div id='div' class='text'>
-<h2 id='align'> Login successful </h2>
-<div id="right"><a href="index.php">Log - out</a></div>
-<br>
-<img style src="images/sabziwala.jpg" alt="SW" class="center1">
-<br>
-<h3 > List of items </h3>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> -->
-<title>Sabziwala</title>
-<link rel="icon" href="images/sabziwala.jpg">
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">   
+    <title>Vegieboy</title>
 </head>
-<body>
-<?php
-    session_start();
-    $s_id=$_SESSION["s_id"];
-    $connection=mysqli_connect("localhost","root");
-    mysqli_select_db($connection,"agriproduct");
-    $qry="select * from items where seller_id='$s_id'";
-    $ans=mysqli_query($connection,$qry);
-    echo "<table>";
-        echo "<tr>";
-        echo "<th>Name</th>";
-        echo "<th>Mobile</th>";
-        echo "<th>Shop-Address</th>";
-        echo "<th>Select-seller</th>";
-        echo "</tr>";
-    while($row=mysqli_fetch_array($ans))
-    {
-        echo "<tr>";
-            echo "<td>".$row['item_id']."</td>";
-            echo "<td>".$row['item_name']."</td>";
-            echo "<td>".$row['item_desc']."</td>";
-            echo "<td>".$row['price']."/kg </td>";
-            echo "</tr>";
-        // echo $row['item_id']." ".$row['item_name']." ".$row['item_desc']." ".$row['price']."/kg ";    
-    }
-    echo "</table>";
-?>
-<br>
-<h3> Orders </h3>
-<?php
-    $s_id=$_SESSION["s_id"];
-    $connection=mysqli_connect("localhost","root");
-    mysqli_select_db($connection,"agriproduct");
-    $qry="select * from customer where seller_id='$s_id' and order_status='Not delivered'";
-    $ans=mysqli_query($connection,$qry);
-    echo "<table>";
-        echo "<tr>";
-        echo "<th>Id</th>";
-        echo "<th>First Name</th>";
-        echo "<th>Last Name</th>";
-        echo "<th>Mobile</th>";
-        echo "<th>Address</th>";
-        echo "<th>Total-bill</th>";
-        echo "<th>To deliver</th>";
-        echo "<th>To cancel</th>";
-        echo "</tr>";
-    while($row=mysqli_fetch_array($ans))
-    {
-        $id=$row['cust_id'];
-        $qry="select * from customer_login where cust_id='$id'";
-        $ab=mysqli_query($connection,$qry);
-        $ab=mysqli_fetch_array($ab);
-        // echo $row['order_id']." ".$ab['First_name']." ".$ab['Last_name']." Mobile - ".$row['mobile']." Add - ".$row['cust_address']." ".$row['order_status']." Bill - ".$row['Total_bill']."Rs/-  ";
-        // $link="http://localhost/Dbms_project/deliver.php";
-        // $od=$row['order_id'];
-        // echo "<a href=$link?order_id='$od'>Make it delivered</a> <br>";
-        // $link="http://localhost/Dbms_project/cancel.php";
-        // $od=$row['order_id'];
-        // echo "<a href=$link?order_id='$od'>Cancel Order</a> <br>";
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Vegieboy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sellerloginsuccessful.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="update.php">Update details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pendingorders.php">Pending Orders!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pastorders.php">Past Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id='mydiv' class='textual'>
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Items for Sale</h2>
+                <?php
+                    session_start();
+                    $s_id = $_SESSION["s_id"];
+                    $connection = mysqli_connect("localhost", "root");
+                    mysqli_select_db($connection, "agriproduct");
+                    $qry = "select * from items where seller_id='$s_id'";
+                    $ans = mysqli_query($connection, $qry);
+                    echo "<table class='table'>";
+                    echo "<tr>";
+                    // echo "<th>S.No.</th>";
+                    echo "<th>Name</th>";
+                    echo "<th>Desc</th>";
+                    echo "<th>Rate</th>";
+                    echo "<th>Remove item</th>";
+                    echo "<th>Update price</th>";
+                    echo "</tr>";
+                    while ($row = mysqli_fetch_array($ans)) {
+                        echo "<tr>";
+                        // echo "<td>" . $row['item_id'] . "</td>";
+                        echo "<td>" . $row['item_name'] . "</td>";
+                        echo "<td>" . $row['item_desc'] . "</td>";
+                        echo "<td>" . $row['price'] . "/kg </td>";
+                        ?>
+                        <td>
+                        <form action="removeitem.php" method="post">
+                                <div >
+                                    <input type="hidden" id="item_id" name="item_id" value="<?php echo $row['item_id']?>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Remove</button>
+                            </form>
+                        </td>
+                        <td>
+                        <form action="updateprice.php" method="post">
+                                <div>
+                                    <input type="hidden" id="item_id" name="item_id" value="<?php echo $row['item_id']?>">
+                                </div>
+                                <div class="row">
+                                    <!-- <label for="price" class="form-label">New Price per kg</label> -->
+                                    <input type="number" id="price" name="price" placeholder="Enter new price in Rs" required>
+                                </div>
+                        </td>
+                        <td>
+                        <button type="submit" class="btn btn-primary">Update price</button>
+                            </form>
+                        </td>
+                        <?php
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                ?>
+            </div>
+        </div>
+        <p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-bs-target
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <div class="container mt-5">
+        <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Add Item</h3>
+                            <form action="addnewitem.php" method="post">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Item Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter item name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="desc" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="desc" name="desc" placeholder="Enter description">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+        
+        
 
-        echo "<tr>";
-            echo "<td>".$row['order_id']."</td>";
-            echo "<td>".$ab['First_name']."</td>";
-            echo "<td>".$ab['Last_name']."</td>";
-            echo "<td>".$row['mobile']."</td>";
-            echo "<td>".$row['cust_address']."</td>";
-            echo "<td>".$row['Total_bill']."Rs/-  </td>";
-            $link="http://localhost/Dbms_project/deliver.php";
-            $od=$row['order_id'];
-            // echo "<a href=$link?order_id='$od'>Make it delivered</a> <br>";
-            echo "<td><a href=$link?order_id=$od> Make it delivered </a></td>";
-            $link="http://localhost/Dbms_project/cancel.php";
-            echo "<td><a href=$link?order_id='$od'>Cancel Order</a> </td>";
-            echo "</tr>";
-        // $invoice="http://localhost/Dbms_project/invoice.php";
-        // $od=$row['order_id'];
-        // $tot=$row['Total_bill'];
-        // echo "<a href=$invoice?order_id='$od'&bill='$tot'>Print invoice</a> <br>";
-        // $url = '/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/';   
-        // $string= preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $link);
-        // echo $string;
-        // echo "      ";  
-        //header('Location: '.$row['Pdf']);
-        // echo (,"Report");
-        // https://stackoverflow.com/questions/1960461/convert-plain-text-urls-into-html-hyperlinks-in-php
-    }
-    echo "</table>";
-?>
-<br>
-<h3> Check past Order </h3>
-<form action="pastorders.php" method="post">
-        <div class="form-group">    
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div> 
-    </form>
-<br>
-<h3> Change customer details <h3>
-<form action="changecustdetails.php" method="post">
-        <div class="form-group">    
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div> 
-    </form>
-<br>
-<form action="addnewitem.php" method="post">
-		<!-- <h2>Login</h2> -->
-		<h3>Add New item</h3>
-		<!-- <hr> -->
-        <div class="form-group">
-            <div class="row">
-				<div class="col-xs-6"><input type="text" class="form-control" name="name" placeholder="Enter item name" required="required"></div>   
-			</div> 
-			<div class="row">
-				<div class="col-xs-6"><input type="text" class="form-control" name="desc" placeholder="Enter item description" required="required"></div>   
-			</div>        
-			<!-- <div class="row">
-				<div class="col-xs-6"><input type="number" class="form-control" name="pric" placeholder="Enter price/kg" required="required"></div>   
-			</div>         -->
-            	
-        </div>
-        <div class="form-group">    
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>  
-    </form>
-<br>
-<form action="removeitem.php" method="post">
-		<!-- <h2>Login</h2> -->
-		<h3>Remove item</h3>
-		<!-- <hr> -->
-        <div class="form-group">
-            <div class="row">
-				<div class="col-xs-6"><input type="int" class="form-control" name="item_id" placeholder="Enter id" required="required"></div>   
-			</div> 
-			<!-- <div class="row">
-				<div class="col-xs-6"><input type="float" class="form-control" name="cap" placeholder="Enter quantity in kg" required="required"></div>   
-			</div>         -->
-            	
-        </div>
-        <div class="form-group">    
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div> 
-    </form>
-<br>
-<form action="updateprice.php" method="post">
-		<!-- <h2>Login</h2> -->
-		<h3>Update price</h3>
-		<!-- <hr> -->
-        <div class="form-group">
-            <div class="row">
-				<div class="col-xs-6"><input type="int" class="form-control" name="item_id" placeholder="Enter id" required="required"></div>   
-			</div> 
-			<div class="row">
-				<div class="col-xs-6"><input type="float" class="form-control" name="price" placeholder="Enter new price per kg" required="required"></div>   
-			</div>        
-            	
-        </div>
-        <div class="form-group">    
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div> 
-    </form>
-<br>
-<form action="changepw.php" method="post">
-		<!-- <h2>Login</h2> -->
-		<h3>Change Password</h3>
-		<!-- <hr> -->
-        <!-- <div class="form-group">
-            <div class="row">
-				<div class="col-xs-6"><input type="int" class="form-control" name="item_id" placeholder="Enter id" required="required"></div>   
-			</div> 
-			<div class="row">
-				<div class="col-xs-6"><input type="float" class="form-control" name="cap" placeholder="Enter quantity in kg" required="required"></div>   
-			</div>        
-            	
-        </div> -->
-        <div class="form-group">    
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div> 
-    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 </div>
